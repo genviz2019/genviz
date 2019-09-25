@@ -48,14 +48,17 @@ class_2_inside = np.zeros((args.class2, 2))
 
 theta = 0
 for i in range(args.class2):
-    class_2_inside[i, :] = [(inner_r) * (math.sin(theta + (i * 2 * math.pi/args.class2))),(inner_r) * (math.cos(theta + (i * 2 * math.pi/args.class2)))]
+    class_2_inside[i, :] = [(inner_r + args.gap) * (math.sin(theta + (i * 2 * math.pi/args.class2))),
+                            (inner_r + args.gap) * (math.cos(theta + (i * 2 * math.pi/args.class2)))]
 
 
 for i in range(args.outer):  
-    class_1_outside[i, :] = [outer_r * (math.sin(theta + (i * 2 * math.pi/args.outer))),outer_r * (math.cos(theta+(i * 2 * math.pi/args.outer)))]
+    class_1_outside[i, :] = [outer_r * (math.sin(theta + (i * 2 * math.pi/args.outer))),
+                             outer_r * (math.cos(theta+(i * 2 * math.pi/args.outer)))]
 
 for i in range(args.inner):
-    class_1_inside[i, :] = [(inner_r + args.gap)* (math.sin(theta + (i * 2 * math.pi/args.inner) + math.pi/args.class2 )),(inner_r + args.gap) * (math.cos(theta + (i * 2 * math.pi/args.inner) + math.pi/args.class2))]
+    class_1_inside[i, :] = [(inner_r)* (math.sin(theta + (i * 2 * math.pi/args.inner) + math.pi/args.class2 )),
+                            (inner_r) * (math.cos(theta + (i * 2 * math.pi/args.inner) + math.pi/args.class2))]
 
 labels1 = np.ones(args.inner + args.outer)
 labels2 = 0*np.ones(args.class2)
