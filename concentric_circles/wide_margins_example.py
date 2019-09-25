@@ -7,6 +7,7 @@ import argparse
 import numpy as np
 import math
 import random 
+import torch.nn.functional as F
 
 parser = argparse.ArgumentParser(description='plotting')
 parser.add_argument('--epochs', default=10000, type=int, help='number of epochs for training')
@@ -69,15 +70,6 @@ for i in range(args.class2):
     enlarge_X[i, :] = [(inner_r + args.enlarge_gap) * (math.sin(theta + (i * 2 * math.pi/args.class2))),(inner_r + args.enlarge_gap) * (math.cos(theta + (i * 2 * math.pi/args.class2)))]
 
 enlarged = torch.Tensor(np.concatenate((enlarge_X, np.concatenate((class_1_outside,class_1_inside))))).to(device)
-
-config = {
-    'epsilon': 0.07,
-    'num_steps': 10,
-    'step_size': 0.015 ,
-    'random_start': True,
-    'loss_func': 'xent',
-}
-
 
 net = nn.Sequential(
 nn.Linear(2,100),
